@@ -1,108 +1,114 @@
 <!doctype html><html lang="ko"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>🏭 콘텐츠공장 운영현황</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,'Pretendard','Apple SD Gothic Neo',sans-serif;background:#0d1117;color:#e6edf3;line-height:1.5;padding:24px;max-width:1100px;margin:0 auto}
-h1{font-size:24px;margin-bottom:4px} .ts{color:#7d8590;font-size:13px;margin-bottom:24px}
-h2{font-size:16px;margin:28px 0 12px;color:#58a6ff;border-bottom:1px solid #21262d;padding-bottom:6px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-.card{background:#161b22;border:1px solid #21262d;border-radius:10px;padding:14px}
-.ch{font-weight:700;font-size:14px} .sub{color:#7d8590;font-weight:400;font-size:12px}
-.big{font-size:30px;font-weight:800;color:#3fb950;margin:6px 0} .unit{font-size:13px;color:#7d8590;font-weight:400;margin-left:3px}
-.pri{font-size:12px;color:#8b949e}
+body{font-family:-apple-system,'Pretendard','Apple SD Gothic Neo',sans-serif;background:#0d1117;color:#e6edf3;padding:20px;max-width:1080px;margin:0 auto}
+h1{font-size:22px} .ts{color:#7d8590;font-size:12px;margin:4px 0 20px}
+h2{font-size:15px;margin:26px 0 12px;color:#58a6ff}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:8px}
+.kpi{background:linear-gradient(135deg,#161b22,#1c2230);border:1px solid #21262d;border-radius:14px;padding:18px;text-align:center}
+.kpi .n{font-size:40px;font-weight:800;line-height:1} .kpi .l{font-size:12px;color:#8b949e;margin-top:6px}
+.kpi.g .n{color:#3fb950} .kpi.b .n{color:#58a6ff} .kpi.p .n{color:#bc8cff}
+.prow{display:flex;align-items:center;gap:12px;margin:9px 0}
+.pl{width:170px;font-size:13px} .psub{color:#7d8590;font-size:11px}
+.pbar{flex:1;height:22px;background:#161b22;border:1px solid #21262d;border-radius:11px;position:relative;overflow:hidden}
+.pfill{height:100%;border-radius:11px;transition:width .6s}
+.pnum{position:absolute;right:10px;top:2px;font-size:12px;font-weight:700}
+.card{background:#161b22;border:1px solid #21262d;border-radius:12px;padding:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#1a2b1f;border:1px solid #2a4a35;color:#7ee2a8;border-radius:20px;padding:5px 12px;font-size:12px}
+.chip b{color:#3fb950}
 table{width:100%;border-collapse:collapse;font-size:13px}
-td{padding:8px 10px;border-bottom:1px solid #21262d} td:first-child{font-weight:600;white-space:nowrap}
-.muted{color:#7d8590}
-.badge{font-size:11px;padding:2px 8px;border-radius:20px;white-space:nowrap}
-.badge.done{background:#1a3326;color:#3fb950} .badge.wait{background:#3d2e12;color:#d29922} .badge.prog{background:#0d2b4a;color:#58a6ff}
-.msum{display:flex;gap:12px;flex-wrap:wrap}
-.mcard{background:#161b22;border:1px solid #21262d;border-radius:10px;padding:12px 18px;text-align:center;flex:1;min-width:120px}
-.mn{font-size:13px;color:#8b949e} .mc{font-size:28px;font-weight:800;color:#58a6ff} .ml{font-size:11px;color:#7d8590}
-.report{background:#161b22;border:1px solid #21262d;border-radius:10px;padding:16px;font-size:13px;color:#c9d1d9}
-.foot{margin-top:32px;color:#484f58;font-size:11px;text-align:center}
+td{padding:7px 10px;border-bottom:1px solid #21262d}
+.muted{color:#7d8590} .ok{color:#3fb950}
+.chartbox{background:#161b22;border:1px solid #21262d;border-radius:12px;padding:16px;height:300px}
+.foot{margin-top:30px;color:#484f58;font-size:11px;text-align:center}
+.live{display:inline-block;width:8px;height:8px;background:#3fb950;border-radius:50%;margin-right:5px;animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.3}}
 </style></head><body>
 <h1>🏭 콘텐츠공장 운영현황</h1>
-<div class="ts">자동 갱신 · 2026-06-08 10:34 · 동업자 공유용(읽기전용)</div>
+<div class="ts"><span class="live"></span>실시간 자동 갱신 · 2026-06-08 10:47 · 동업자 공유(읽기전용)</div>
 
-<h2>📋 주간 방침 · 2026-W24 (2026-06-08 ~ 2026-06-14)</h2>
-<div class="grid"><div class="card">
-          <div class="ch">쿠파스 <span class="sub">놓치면손해템</span></div>
-          <div class="big">7<span class="unit">편/주</span></div>
-          <div class="pri">노트북 검색량 상위 제휴 (라이트A 민트)</div>
+<div class="kpis">
+  <div class="kpi g"><div class="n">7</div><div class="l">오늘 제작·배포</div></div>
+  <div class="kpi b"><div class="n">7<span style="font-size:18px;color:#7d8590">/36</span></div><div class="l">이번주 (2026-W24)</div></div>
+  <div class="kpi p"><div class="n">122</div><div class="l">누적 총 제작</div></div>
+</div>
+
+<h2>📦 오늘 나간 영상</h2>
+<div class="card"><div class="chips"><span class="chip"><b>쿠파스</b> 삼성 갤럭시북5 프로 360</span><span class="chip"><b>쿠파스</b> HP 2023 오멘 16</span><span class="chip"><b>쿠파스1</b> HP 옴니북 X 플립 14</span><span class="chip"><b>해외쇼츠</b> 렉서스RX 대시보드 가죽복원</span><span class="chip"><b>해외쇼츠1</b> 벽 파이프 통과 그라인더 가공</span><span class="chip"><b>왜그럴까</b> 코끼리가 가젤 곁을 지키는 이유</span><span class="chip"><b>왜그럴까</b> 치타 사냥 성공률이 낮은 이유</span></div></div>
+
+<h2>🎯 주간 목표 진행률 · 2026-06-08 ~ 2026-06-14</h2>
+<div class="card"><div class="prow">
+          <div class="pl"><b>쿠파스</b> <span class="psub">놓치면손해템</span></div>
+          <div class="pbar"><div class="pfill" style="width:28%;background:#58a6ff"></div>
+            <span class="pnum">2 / 7</span></div>
         </div>
-<div class="card">
-          <div class="ch">쿠파스1 <span class="sub">가전스튜디오</span></div>
-          <div class="big">7<span class="unit">편/주</span></div>
-          <div class="pri">노트북 제휴 (라이트B 코랄, 쿠파스와 소스 100% 분리)</div>
+<div class="prow">
+          <div class="pl"><b>쿠파스1</b> <span class="psub">가전스튜디오</span></div>
+          <div class="pbar"><div class="pfill" style="width:14%;background:#58a6ff"></div>
+            <span class="pnum">1 / 7</span></div>
         </div>
-<div class="card">
-          <div class="ch">해외쇼츠 <span class="sub">크래프트스튜디오</span></div>
-          <div class="big">7<span class="unit">편/주</span></div>
-          <div class="pri">틱톡 자동차 정비/트릭 (차종+증상 제목)</div>
+<div class="prow">
+          <div class="pl"><b>해외쇼츠</b> <span class="psub">메카닉스튜디오</span></div>
+          <div class="pbar"><div class="pfill" style="width:14%;background:#58a6ff"></div>
+            <span class="pnum">1 / 7</span></div>
         </div>
-<div class="card">
-          <div class="ch">해외쇼츠1 <span class="sub">숏츠시작</span></div>
-          <div class="big">7<span class="unit">편/주</span></div>
-          <div class="pri">틱톡 생활/기기 수리</div>
+<div class="prow">
+          <div class="pl"><b>해외쇼츠1</b> <span class="psub">숏츠시작</span></div>
+          <div class="pbar"><div class="pfill" style="width:14%;background:#58a6ff"></div>
+            <span class="pnum">1 / 7</span></div>
         </div>
-<div class="card">
-          <div class="ch">왜그럴까 <span class="sub">왜그럴까</span></div>
-          <div class="big">5<span class="unit">편/주</span></div>
-          <div class="pri">틱톡 잡학 바이럴 (박스자막, 동물 최강소재)</div>
+<div class="prow">
+          <div class="pl"><b>왜그럴까</b> <span class="psub">왜그럴까</span></div>
+          <div class="pbar"><div class="pfill" style="width:40%;background:#58a6ff"></div>
+            <span class="pnum">2 / 5</span></div>
         </div>
-<div class="card">
-          <div class="ch">신이슈TV <span class="sub">신이슈TV</span></div>
-          <div class="big">3<span class="unit">편/주</span></div>
-          <div class="pri">시사 롱폼 (효잉 스타일)</div>
+<div class="prow">
+          <div class="pl"><b>신이슈TV</b> <span class="psub">신이슈TV</span></div>
+          <div class="pbar"><div class="pfill" style="width:0%;background:#30363d"></div>
+            <span class="pnum">0 / 3</span></div>
         </div></div>
 
-<h2>🎬 이번 주 제작 현황</h2>
-<table><tr><td>해외쇼츠</td><td>Cleaning pistons &amp; Head gasket mating surf</td><td><span class="badge done">제작완료-승인대기</span></td></tr>
-<tr><td>해외쇼츠1</td><td>restoring and cleaning my antique / vintage po</td><td><span class="badge done">선택완료-제작대기</span></td></tr>
-<tr><td>왜그럴까</td><td>Why Leopard seals are terrifying… #fyp </td><td><span class="badge done">선택완료-제작대기</span></td></tr>
-<tr><td>쿠파스</td><td>삼성 갤럭시북5 프로 360 (놓치면손해템)</td><td><span class="badge done">발송완료</span></td></tr>
-<tr><td>해외쇼츠</td><td>1990 Year old truck restoration and repair #re</td><td><span class="badge done">선택완료-제작대기</span></td></tr>
-<tr><td>해외쇼츠1</td><td>Another dryer saved </td><td><span class="badge done">선택완료-제작대기</span></td></tr>
-<tr><td>왜그럴까</td><td>Why the Quetzalcoatlus was horrifying… #fyp </td><td><span class="badge done">선택완료-제작대기</span></td></tr>
-<tr><td>해외쇼츠</td><td>1990 Year old truck restoration and repair #re</td><td><span class="badge done">선택완료-제작대기</span></td></tr>
-<tr><td>해외쇼츠1</td><td>Another dryer saved </td><td><span class="badge done">선택완료-제작대기</span></td></tr>
-<tr><td>왜그럴까</td><td>What happens when you slice through a tsunami,</td><td><span class="badge done">선택완료-제작대기</span></td></tr>
-<tr><td>쿠파스</td><td>HP 2023 오멘 16</td><td><span class="badge done">선택완료-제작대기</span></td></tr>
-<tr><td>쿠파스1</td><td>HP 옴니북X플립 14</td><td><span class="badge done">선택완료-제작대기</span></td></tr></table>
-
-<h2>📊 누적 제작 실적</h2>
-<div class="msum"><div class="mcard"><div class="mn">해외쇼츠</div><div class="mc">0</div><div class="ml">누적 제작</div></div>
-<div class="mcard"><div class="mn">쿠파스</div><div class="mc">39</div><div class="ml">누적 제작</div></div>
-<div class="mcard"><div class="mn">왜그럴까</div><div class="mc">8</div><div class="ml">누적 제작</div></div>
-<div class="mcard"><div class="mn">신이슈TV</div><div class="mc">1</div><div class="ml">누적 제작</div></div></div>
+<h2>📊 채널별 누적 제작</h2>
+<div class="chartbox"><canvas id="ch1"></canvas></div>
 
 <h2>🕐 최근 제작 이력</h2>
-<table><tr><td>신이슈TV</td><td>투표용지 부족 사태, 대통령은 뭘 할 수 있나</td><td class="muted">2026-06-05</td></tr>
-<tr><td>왜그럴까</td><td>치타 사냥 성공률이 낮은 이유</td><td class="muted">2026-06-08</td></tr>
-<tr><td>왜그럴까</td><td>코끼리가 가젤 곁을 지키는 이유</td><td class="muted">2026-06-08</td></tr>
-<tr><td>왜그럴까</td><td>고양이는 왜 박스를 좋아할까</td><td class="muted">2026-06-07</td></tr>
-<tr><td>왜그럴까</td><td>해마는 왜 수컷이 새끼를 낳을까</td><td class="muted">2026-06-06</td></tr>
-<tr><td>왜그럴까</td><td>카멜레온이 색을 바꾸는 진짜 이유</td><td class="muted">2026-06-06</td></tr>
-<tr><td>왜그럴까</td><td>문어가 순식간에 색을 바꾸는 진짜 이유</td><td class="muted">2026-06-06</td></tr>
-<tr><td>쿠파스</td><td>HP 옴니북 X 플립 14</td><td class="muted">2026-06-08</td></tr>
-<tr><td>쿠파스</td><td>HP 2023 오멘 16</td><td class="muted">2026-06-08</td></tr>
-<tr><td>쿠파스</td><td>삼성 갤럭시북5 프로 360</td><td class="muted">2026-06-08</td></tr>
-<tr><td>쿠파스</td><td>ASUS 비보북 16 (라이젠5)</td><td class="muted">2026-06-07</td></tr>
-<tr><td>쿠파스</td><td>ASUS 비보북 16 (라이젠5)</td><td class="muted">2026-06-07</td></tr>
-<tr><td>쿠파스</td><td>썬더로봇 RZ16 (RTX5070)</td><td class="muted">2026-06-06</td></tr></table>
+<div class="card"><table><tr><td class="muted">2026-06-08</td><td><b>쿠파스</b></td><td>삼성 갤럭시북5 프로 360</td></tr>
+<tr><td class="muted">2026-06-08</td><td><b>쿠파스</b></td><td>HP 2023 오멘 16</td></tr>
+<tr><td class="muted">2026-06-08</td><td><b>쿠파스1</b></td><td>HP 옴니북 X 플립 14</td></tr>
+<tr><td class="muted">2026-06-08</td><td><b>해외쇼츠</b></td><td>렉서스RX 대시보드 가죽복원</td></tr>
+<tr><td class="muted">2026-06-08</td><td><b>해외쇼츠1</b></td><td>벽 파이프 통과 그라인더 가공</td></tr>
+<tr><td class="muted">2026-06-08</td><td><b>왜그럴까</b></td><td>코끼리가 가젤 곁을 지키는 이유</td></tr>
+<tr><td class="muted">2026-06-08</td><td><b>왜그럴까</b></td><td>치타 사냥 성공률이 낮은 이유</td></tr>
+<tr><td class="muted">2026-06-07</td><td><b>쿠파스</b></td><td>ASUS 비보북 16 (라이젠5)</td></tr>
+<tr><td class="muted">2026-06-07</td><td><b>쿠파스1</b></td><td>ASUS 비보북 16 (라이젠5)</td></tr>
+<tr><td class="muted">2026-06-07</td><td><b>해외쇼츠</b></td><td>엔진 부러진 볼트 용접추출(LS)</td></tr>
+<tr><td class="muted">2026-06-07</td><td><b>해외쇼츠</b></td><td>VW 헤드개스킷면 청소(재누수 방지)</td></tr>
+<tr><td class="muted">2026-06-07</td><td><b>해외쇼츠1</b></td><td>빈티지 타일 복원(100년 타일)</td></tr></table></div>
 
 <h2>⚠️ 막힌 항목</h2>
-<table><tr><td>왜그럴까</td><td>/tmp/wae_alife/script_tts.txt</td><td class="muted">QC 불합격: 자막 한글숫자(아라비아여야): &#x27;백 킬로&#x27; in 「시속 {\1c&amp;H0</td></tr>
-<tr><td>왜그럴까</td><td>쓰나미 단면(원큐)+코끼리가젤(대체)</td><td class="muted">쓰나미=AI합성+영문라벨(룰14·실사아님). 코끼리가젤 대체=LAD BIBLE 워터마크 우상단 안쪽(x&lt</td></tr>
-<tr><td>해외쇼츠</td><td>1990 트럭 복원</td><td class="muted">영문자막 &#x27;1990 Year old car restoration&#x27; 상단 떡칠 + 유튜브 U</td></tr>
-<tr><td>전체</td><td>NAS 대용량 업로드</td><td class="muted">Tailscale 대용량 POST timeout(600s) — API쿼리는 정상, 22MB전송만 멈춤</td></tr>
-<tr><td>왜그럴까</td><td>오리 비올때 가만히 서있는 이유</td><td class="muted">애니메이션+영문자막 → 실사다큐 아님</td></tr>
-<tr><td>왜그럴까</td><td>표범물범 왜 무서운가</td><td class="muted">영문 번인자막 떡칠(카운트다운 밈)+합성영상 → 룰14 위반</td></tr>
-<tr><td>해외쇼츠1</td><td>앤틱 도자기 복원</td><td class="muted">yt-dlp rehydration 에러 (3회 retry 실패)</td></tr></table>
+<div class="card"><table><tr><td><b>왜그럴까</b></td><td>/tmp/wae_alife/script_tts.txt</td><td class="muted">QC 불합격: 자막 한글숫자(아라비아여야): &#x27;백 킬로&#x27; in 「시속 {</td></tr>
+<tr><td><b>왜그럴까</b></td><td>쓰나미 단면(원큐)+코끼리가젤(대체)</td><td class="muted">쓰나미=AI합성+영문라벨(룰14·실사아님). 코끼리가젤 대체=LAD BIBLE 워터마크 우</td></tr>
+<tr><td><b>해외쇼츠</b></td><td>1990 트럭 복원</td><td class="muted">영문자막 &#x27;1990 Year old car restoration&#x27; 상단 </td></tr>
+<tr><td><b>전체</b></td><td>NAS 대용량 업로드</td><td class="muted">Tailscale 대용량 POST timeout(600s) — API쿼리는 정상, 22MB</td></tr>
+<tr><td><b>왜그럴까</b></td><td>오리 비올때 가만히 서있는 이유</td><td class="muted">애니메이션+영문자막 → 실사다큐 아님</td></tr></table></div>
 
-<h2>📝 오늘의 보고</h2>
-<div class="report">📋 일일 보고 — 2026-06-08 21:00<br><br>✅ 오늘 완성: 1편<br>  · [해외쇼츠] Cleaning pistons &amp; Head gask<br><br>🎬 선택완료-제작대기: 10편<br><br>🔔 승인 필요: 0건<br><br>⚠️ 막힌 것: 6건<br>  · [전체] NAS 대용량 업로드 (Tailscale 대용량 POST timeo)<br>  · [해외쇼츠] 1990 트럭 복원 (영문자막 &#x27;1990 Year old car )<br>  · [왜그럴까] 쓰나미 단면(원큐)+코끼리가젤(대체) (쓰나미=AI합성+영문라벨(룰14·실사아님).)<br><br>📊 주간 진행률<br>  (made_log 누적: 해외쇼츠 43 / 해외쇼츠1 31)<br><br>사장님: 발송ok / 별로면 한마디 → 시드 학습<br></div>
-
-<div class="foot">콘텐츠공장 자동화 시스템 · 민감정보(키·비번) 미포함 · 제작/배포 시 자동 갱신</div>
+<div class="foot">콘텐츠공장 자동화 · 민감정보(키·비번) 미포함 · 제작/배포 시 자동 갱신 · 30분 주기 발행</div>
+<script>
+new Chart(document.getElementById('ch1'),{
+  type:'bar',
+  data:{labels:["쿠파스", "쿠파스1", "해외쇼츠", "해외쇼츠1", "왜그럴까", "신이슈TV"],datasets:[
+    {label:'누적',data:[22, 17, 43, 32, 8, 0],backgroundColor:'#bc8cff'},
+    {label:'이번주',data:[2, 1, 1, 1, 2, 0],backgroundColor:'#3fb950'}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{labels:{color:'#8b949e'}}},
+    scales:{x:{ticks:{color:'#8b949e'},grid:{color:'#21262d'}},
+            y:{ticks:{color:'#8b949e'},grid:{color:'#21262d'},beginAtZero:true}}
+  }
+});
+</script>
 </body></html>
